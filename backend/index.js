@@ -32,7 +32,11 @@ db.once('open', () => {
     console.log(`[+] Server Up at ${PORT}`);
   })
 })
+
+
 app.get ('/api/', async (req,res) => {
   await res.json({status:"online"}).status(200);
-})
 });
+
+const tweetRoute = require('./api/Routes/tweetsRoute.js');
+app.use("api/", tweetRoute);

@@ -15,3 +15,20 @@ const MongoUri = "mongodb://localhost:27017/twitter/";
 // app configurations
 const app = express();
 app.use(express.json());
+
+mongoose.connect(MongoUri);
+
+const db = mongoose.connection;
+
+db.on('error' , () => {
+  console.log("[-] Error connecting Server");
+})
+
+db.once('open', () => {
+
+  console.log("[+] connected to DB");
+
+  app.listen(PORT, () => {
+    console.log(`[+] Server Up at ${PORT}`);
+  })
+})
